@@ -1,11 +1,11 @@
-import moment from 'moment';
+import moment from "moment";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import mergeWith from 'lodash/mergeWith';
-import {window} from 'global';
+import mergeWith from "lodash/mergeWith";
+import { window } from "global";
 
 // returns a negative number for dates that have already passed
 export const daysBetween = (futureDate) => {
-  const tmpFuture = futureDate.slice(0, 10).split('-');
+  const tmpFuture = futureDate.slice(0, 10).split("-");
   return Math.floor(
     (new Date(tmpFuture[0], tmpFuture[1] - 1, tmpFuture[2]) - new Date()) / (1000 * 60 * 60 * 24),
   );
@@ -15,22 +15,22 @@ export function getMobileWebOperatingSystem() {
   const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
   if (/android/i.test(userAgent)) {
-    return 'android';
+    return "android";
   }
 
   if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-    return 'ios';
+    return "ios";
   }
 
-  return '';
+  return "";
 }
 
 // returns a negative number for furtureDates that have already passed
 export const daysUntil = (futureDate, currentDate) => {
   if (currentDate) {
-    return moment(futureDate).diff(moment(currentDate, 'days')) + 1;
+    return moment(futureDate).diff(moment(currentDate, "days")) + 1;
   }
-  return moment(futureDate).diff(moment(), 'days') + 1;
+  return moment(futureDate).diff(moment(), "days") + 1;
 };
 
 export const isMobileWeb = () => {
@@ -51,8 +51,8 @@ export const isMobileWeb = () => {
 };
 
 export const getWebOS = () => {
-  if (navigator?.platform && navigator?.platform?.indexOf('iPhone') !== -1) return 'ios';
-  return 'android';
+  if (navigator?.platform && navigator?.platform?.indexOf("iPhone") !== -1) return "ios";
+  return "android";
 };
 
 // number, decimals - use math.floor to account for incorrect Javascript math
@@ -94,7 +94,7 @@ export function mergeArrays(...arrays) {
 // eslint-disable-next-line consistent-return
 export function customizer(objValue, srcValue, key) {
   if (Array.isArray(objValue)) {
-    if (key === 'media') {
+    if (key === "media") {
       return mergeMediaArarys(objValue, srcValue);
     }
     return mergeArrays(objValue, srcValue);
@@ -113,7 +113,7 @@ export function createFormURL(values) {
     const encodedValue = encodeURIComponent(values[key]);
     formBody.push(`${encodedKey}=${encodedValue}`);
   });
-  return formBody.join('&');
+  return formBody.join("&");
 }
 
 export const openLink = (link, newTab = false) => {
@@ -145,17 +145,17 @@ export const makeAuthToken = (accessToken) => {
 };
 
 export const isJSON = (contentType) => {
-  const i = contentType.indexOf('application/json');
+  const i = contentType.indexOf("application/json");
   return i !== -1;
 };
 
 export const getQueryParams = (url) => {
-  const params = url.split('?');
+  const params = url.split("?");
   if (params.length === 2) {
-    const split = params[1].split('&');
+    const split = params[1].split("&");
     return split.reduce((acc, curr) => {
-      const [key, value] = curr.split('=');
-      acc[key] = value.replace('%20', ' ');
+      const [key, value] = curr.split("=");
+      acc[key] = value.replace("%20", " ");
       return acc;
     }, {});
   }
@@ -184,7 +184,7 @@ export const arrayHas = (array, item) => {
 export const toSignificantDigits = (n, digits) => {
   const fallback = 0;
   if (!n) return fallback.toPrecision(digits);
-  if (typeof n === 'string') {
+  if (typeof n === "string") {
     return Number.parseFloat(n).toPrecision(digits);
   }
   return n.toPrecision(digits);
@@ -195,7 +195,7 @@ export const toSignificantDecimals = (n, digits = 2) => {
   const fallback = 0;
   const factor = Math.pow(10, digits);
   if (!n) return fallback.toFixed(digits);
-  if (typeof n === 'string') {
+  if (typeof n === "string") {
     return Math.floor(Number.parseFloat(n) * factor) / factor;
   }
   return Math.floor(n * factor) / factor;
@@ -204,7 +204,7 @@ export const toSignificantDecimals = (n, digits = 2) => {
 export const toFixed = (n, digits = 2) => {
   const fallback = 0;
   if (!n) return fallback.toFixed(digits);
-  if (typeof n === 'string') return Number(n).toFixed(digits);
+  if (typeof n === "string") return Number(n).toFixed(digits);
   return n.toFixed(digits);
 };
 
@@ -218,7 +218,7 @@ export const commafy = (n, digits = 2) => {
       maximumFractionDigits: digits,
     });
 
-  if (typeof n === 'string') {
+  if (typeof n === "string") {
     return handleOutput(Number(n));
   }
   return handleOutput(n);
@@ -242,24 +242,24 @@ export function throttle(limit) {
 }
 
 export const capitalize = (s) => {
-  if (typeof s !== 'string') return '';
+  if (typeof s !== "string") return "";
   return s.charAt(0).toUpperCase() + s.slice(1);
 };
 
 export const displayPhone = (phoneNumber) => {
-  if (typeof phoneNumber !== 'string') return '';
+  if (typeof phoneNumber !== "string") return "";
   return `********${phoneNumber.slice(phoneNumber.length - 2)}`;
 };
 
 export const toLower = (str) => {
-  if (!str || typeof str !== 'string') return '';
+  if (!str || typeof str !== "string") return "";
   return str.toLowerCase();
 };
 
 export const getPercentColor = (n) => {
-  if (n === 0) return 'black';
-  if (n > 0) return 'green';
-  return 'red';
+  if (n === 0) return "black";
+  if (n > 0) return "green";
+  return "red";
 };
 
 export const convertToBase64 = (event, callback) => {

@@ -1,2 +1,2 @@
-export * from './functions.js';
-export * from './sorters';
+export * from "./functions.js";
+export * from "./sorters";
